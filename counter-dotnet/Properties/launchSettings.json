@@ -7,6 +7,9 @@
         "STOP": "100",
         "DELAY": "1.0"
       }
+    },
+    "Docker": {
+      "commandName": "Docker"
     }
   }
 }
