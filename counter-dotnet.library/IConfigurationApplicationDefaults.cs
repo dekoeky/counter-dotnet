@@ -14,8 +14,8 @@ public static class IConfigurationApplicationDefaults
     internal static readonly IReadOnlyDictionary<string, string?> values
         = new Dictionary<string, string?>()
         {
-        { START , start.ToString(culture)       },
-        { STOP  , stop.ToString(culture)        },
-        { DELAY , delay.ToString(null, culture) },
+        { START , start.ToString(culture)               },
+        { STOP  , stop.ToString(culture)                },
+        { DELAY , delay.TotalSeconds.ToString(culture)  },
         }.AsReadOnly();
 }
