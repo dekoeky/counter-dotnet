@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "counter-dotnet": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "START": "0",
+        "STOP": "100",
+        "DELAY": "1.0"
+      }
+    }
+  }
+}
