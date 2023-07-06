@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  counter-dotnet:
+    image: ${DOCKER_REGISTRY-}counterdotnet
+    build:
+      context: .
+      dockerfile: counter-dotnet/Dockerfile
+
+      
+  counter-dotnet:
+    image: ${DOCKER_REGISTRY-}counterdotnet
+    build:
+      context: .
+      dockerfile: counter-dotnet/Dockerfile
