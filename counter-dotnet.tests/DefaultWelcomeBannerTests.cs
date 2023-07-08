@@ -10,10 +10,10 @@ public class DefaultWelcomeBannerTests
     public void TestConstructor()
     {
         //Arrange
-        var banner = new DefaultWelcomeBannerGenerator();
+        var generator = new DefaultWelcomeBannerGenerator();
 
         //Act
-        var result = banner.GetBanner();
+        var result = generator.GetBanner();
 
         //Assert
         Assert.IsNotNull(result);
