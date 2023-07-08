@@ -2,6 +2,11 @@
 using counter_dotnet;
 using Microsoft.Extensions.Configuration;
 
+//Display welcome banner
+IWelcomeBannerGenerator banner = new DefaultWelcomeBannerGenerator();
+Console.WriteLine(banner.GetBanner());
+
+
 //Build the configuration
 var configuration = new ConfigurationBuilder()
     .AddApplicationDefaults()

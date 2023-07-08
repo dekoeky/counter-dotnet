@@ -2,7 +2,6 @@
 using static counter_dotnet.IConfigurationNames;
 
 namespace counter_dotnet;
-
 public static class IConfigurationApplicationDefaults
 {
     private readonly static CultureInfo culture = CultureInfo.InvariantCulture;
