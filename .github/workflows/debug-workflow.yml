@@ -3,6 +3,10 @@ name: "Debug Workflow"
 run-name: "Debug Workflow Run ${{ github.run_number }} Attempt # ${{ github.run_attempt }}"
 
 on:
+  push:
+    branches:
+      workflows
+
   workflow_dispatch:
     inputs:
       dispatch-reason:
