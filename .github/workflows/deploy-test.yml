@@ -27,7 +27,9 @@ env:
 on:
   push:
     branches: [ "workflows" ]
+    
   workflow_dispatch:
+
 
 permissions:
   contents: read
@@ -90,7 +92,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: 
       - build
-      - deploy-to-dev      
+      - deploy-to-dev     
+     
     environment:
       name: 'qa'
       url: ${{ steps.deploy-to-qa.outputs.webapp-url }}
