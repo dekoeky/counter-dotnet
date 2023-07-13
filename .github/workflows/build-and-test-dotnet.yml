@@ -10,9 +10,6 @@ on:
       main
       development
 
-    branches-ignore:
-      workflows
-
   #Run when sheduled manually:
   workflow_dispatch:
 
