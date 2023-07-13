@@ -33,6 +33,7 @@ permissions:
   contents: read
 
 jobs:
+  
   build:
     runs-on: ubuntu-latest
 
@@ -64,7 +65,8 @@ jobs:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
 
-  deploy:
+
+  deploy-to-dev:
     permissions:
       contents: none
     runs-on: ubuntu-latest
@@ -72,7 +74,69 @@ jobs:
     environment:
       name: 'dev'
       url: ${{ steps.deploy-to-dev.outputs.webapp-url }}
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: .net-app
+      - name: Deploy to Azure Web App
+        id: deploy-to-dev
+        run: echo "🚀 Deploying the ${{ env.AZURE_WEBAPP_NAME }} app to ${{ vars.ENVIRONMENTNAME }}."
+        
 
+  deploy-to-qa:
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest
+    needs: 
+      - build
+      - deploy-to-dev      
+    environment:
+      name: 'qa'
+      url: ${{ steps.deploy-to-qa.outputs.webapp-url }}
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: .net-app
+      - name: Deploy to Azure Web App
+        id: deploy-to-qa
+        run: echo "🚀 Deploying the ${{ env.AZURE_WEBAPP_NAME }} app to ${{ vars.ENVIRONMENTNAME }}."
+
+
+  deploy-to-staging:
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest
+    needs: 
+      - build
+      - deploy-to-dev
+      - deploy-to-qa      
+    environment:
+      name: 'staging'
+      url: ${{ steps.deploy-to-staging.outputs.webapp-url }}
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: .net-app
+      - name: Deploy to Azure Web App
+        id: deploy-to-staging
+        run: echo "🚀 Deploying the ${{ env.AZURE_WEBAPP_NAME }} app to ${{ vars.ENVIRONMENTNAME }}."
+
+
+  deploy-to-pr:
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest
+    needs: 
+      - build
+      - deploy-to-dev
+      - deploy-to-qa
+      - deploy-to-staging      
+    environment:
+      name: 'pr'
+      url: ${{ steps.deploy-to-pr.outputs.webapp-url }}
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
@@ -80,10 +144,5 @@ jobs:
           name: .net-app
 
       - name: Deploy to Azure Web App
-        id: deploy-to-dev
+        id: deploy-to-pr
         run: echo "🚀 Deploying the ${{ env.AZURE_WEBAPP_NAME }} app to ${{ vars.ENVIRONMENTNAME }}."
-        # uses: azure/webapps-deploy@v2
-        # with:          
-        #   app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        #   publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        #   package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
