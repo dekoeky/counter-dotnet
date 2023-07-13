@@ -6,6 +6,13 @@ name: Build & Test .NET Code
 on:
   #Run for every push on every branch:
   push:
+    branches:
+      main
+      development
+
+    branches-ignore:
+      workflows
+
   #Run when sheduled manually:
   workflow_dispatch:
 
