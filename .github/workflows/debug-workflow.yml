@@ -1,0 +1,34 @@
+
+name: "Debug Workflow"
+run-name: "Debug Workflow Run ${{ github.run_number }} Attempt # ${{ github.run_attempt }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      dispatch-reason:
+        required: true
+        description: The reason why this workflow was started
+        type: string
+        default: "Unspecified"
+        
+jobs:
+  job-one:
+    name: The first job
+    runs-on: ubuntu-latest
+    # strategy:
+    #   matrix:
+    #     dotnet-version: [ '6.0.x', '7.0.x' ]
+    steps:
+    # - name: Checkout the code
+    #   uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+
+    - name: Do Stuff
+      run: dotnet --info
+
+    - run: dotnet --list-sdks
+    - run: dotnet --list-runtimes
