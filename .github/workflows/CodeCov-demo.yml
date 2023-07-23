@@ -1,0 +1,13 @@
+
+name: CodeCov Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [workflow_dispatch]
+jobs:
+  CodeCoverage:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉Doing code coverage"
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
