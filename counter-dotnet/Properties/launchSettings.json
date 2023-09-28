@@ -1,13 +1,17 @@
 {
   "profiles": {
+
     "counter-dotnet": {
       "commandName": "Project",
       "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development",
         "START": "0",
         "STOP": "100",
         "DELAY": "1.0"
-      }
+      },
+      "dotnetRunMessages": true
     },
+
     "Docker": {
       "commandName": "Docker"
     }
