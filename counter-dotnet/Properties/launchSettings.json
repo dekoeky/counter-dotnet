@@ -1,13 +1,13 @@
 {
   "profiles": {
 
-    "counter-dotnet": {
+    "count to 100": {
       "commandName": "Project",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development",
-        "START": "0",
-        "STOP": "100",
-        "DELAY": "1.0"
+        "Start": "0",
+        "Stop": "100",
+        "DelaySeconds": "1.1"
       },
       "dotnetRunMessages": true
     },
