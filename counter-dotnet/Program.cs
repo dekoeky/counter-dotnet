@@ -1,28 +1,18 @@
 ﻿
 using counter_dotnet;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
-//Display welcome banner
-IWelcomeBannerGenerator banner = new DefaultWelcomeBannerGenerator();
+//Legacy functionality
+var banner = new DefaultWelcomeBannerGenerator();
 Console.WriteLine(banner.GetBanner());
 
+var builder = Host.CreateApplicationBuilder(args);
 
-//Build the configuration
-var configuration = new ConfigurationBuilder()
-    .AddApplicationDefaults()
-    .AddJsonFile("appsettings.json", optional: true)
-    .AddEnvironmentVariables()
-    .AddCommandLine(args)
-    .Build();
+//Add the Service, Service Options and Service Options Validation
+builder.Services.Configure<CounterOptions>(builder.Configuration);
+builder.Services.AddSingleton<IValidateOptions<CounterOptions>, CounterOptionsValidator>();
+builder.Services.AddHostedService<CounterService>();
 
-//Extract application parameters
-var start = configuration.GetValue<ulong>(IConfigurationNames.START);
-var stop = configuration.GetValue<ulong>(IConfigurationNames.STOP);
-var delay_s = configuration.GetValue<double>(IConfigurationNames.DELAY);
-var delay = TimeSpan.FromSeconds(delay_s);
+var host = builder.Build();
 
-//Create the counter
-var counter = new Counter<ulong>(start, stop, delay);
-
-//Run the application
-await counter.RunAsync();
+host.Run();
