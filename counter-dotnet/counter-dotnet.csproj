@@ -3,9 +3,8 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>counter_dotnet</RootNamespace>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <UserSecretsId>b64a025e-ca12-4c51-aced-145f8d199749</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\counter-dotnet.library\counter-dotnet.library.csproj" />
