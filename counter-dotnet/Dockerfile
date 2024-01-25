@@ -1,9 +1,9 @@
 #See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM --platform=$TARGETPLATFORM mcr.microsoft.com/dotnet/runtime:7.0 AS base
+FROM --platform=$TARGETPLATFORM mcr.microsoft.com/dotnet/runtime:8.0 AS base
 WORKDIR /app
 
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY ["counter-dotnet/counter-dotnet.csproj", "counter-dotnet/"]
 COPY ["counter-dotnet.library/counter-dotnet.library.csproj", "counter-dotnet.library/"]
